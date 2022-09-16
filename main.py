@@ -10,6 +10,8 @@ api = Api(app)
 class Wear(Resource):
     def get(self):
         zodiac = request.args.get('zodiac')
+        if zodiac == None:
+            return {'message': 'Invalid Query'}
         URL = "https://trustedteller.com/horoscope/"+zodiac+"/horoscope-today/luck"
         page = requests.get(URL)
 
