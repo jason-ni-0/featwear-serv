@@ -4,7 +4,7 @@ from flask import Flask,request
 from flask_restful import Resource, Api, reqparse
 import ast
 from datetime import date
-import config
+from config import API_KEY
 
 app = Flask(__name__)
 api = Api(app)
@@ -44,7 +44,6 @@ class Color(Resource):
 
 class Weather(Resource):
     def get(self):
-        API_KEY = config.API_KEY
         lat = request.args.get('lat')
         long = request.args.get('long')
         if (lat == None) or (long == None):
