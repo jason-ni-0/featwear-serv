@@ -4,7 +4,7 @@ from flask import Flask,request
 from flask_restful import Resource, Api, reqparse
 import ast
 from datetime import date
-from .config import API_KEY
+import utils.config
 
 app = Flask(__name__)
 api = Api(app)
@@ -48,7 +48,7 @@ class Weather(Resource):
         long = request.args.get('long')
         if (lat == None) or (long == None):
             return {'message': 'Invalid Query'}
-        URL = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid={API_KEY}&units=imperial'
+        URL = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid={utils.config.API_KEY}&units=imperial'
         weather = requests.get(URL)
         return {'name': weather.json()['name'], 'weather': weather.json()['weather'][0]['description'], 'temp': round(weather.json()['main']['temp']), 'min': round(weather.json()['main']['temp_min']), 'max': round(weather.json()['main']['temp_max'])}
 
