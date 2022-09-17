@@ -4,7 +4,7 @@ from flask import Flask,request
 from flask_restful import Resource, Api, reqparse
 import ast
 from datetime import date
-from config import API_KEY
+from .config import API_KEY
 
 app = Flask(__name__)
 api = Api(app)
