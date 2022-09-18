@@ -4,7 +4,9 @@ from flask import Flask,request
 from flask_restful import Resource, Api, reqparse
 import ast
 from datetime import date
-from utils import config
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
 app = Flask(__name__)
 api = Api(app)
@@ -44,11 +46,12 @@ class Color(Resource):
 
 class Weather(Resource):
     def get(self):
+        API_KEY = os.getenv("WEATHER_API_KEY")
         lat = request.args.get('lat')
         long = request.args.get('long')
         if (lat == None) or (long == None):
             return {'message': 'Invalid Query'}
-        URL = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid={config.API_KEY}&units=imperial'
+        URL = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid={API_KEY}&units=imperial'
         weather = requests.get(URL)
         return {'name': weather.json()['name'], 'weather': weather.json()['weather'][0]['description'], 'temp': round(weather.json()['main']['temp']), 'min': round(weather.json()['main']['temp_min']), 'max': round(weather.json()['main']['temp_max'])}
 
