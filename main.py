@@ -54,7 +54,7 @@ class Weather(Resource):
         URL = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid={API_KEY}&units=imperial'
         weather = requests.get(URL)
         weather = weather.json()
-        data = {'name': weather['name'], 'weather': weather['weather'][0]['description'], 'temp': round(weather['main']['temp']), 'min': round(weather['main']['temp_min']), 'max': round(weather['main']['temp_max'])}
+        data = {'city': weather['name'], 'weather': weather['weather'][0]['description'], 'temp': round(weather['main']['temp']), 'min': round(weather['main']['temp_min']), 'max': round(weather['main']['temp_max'])}
         return data
 
 api.add_resource(Color, '/color')
