@@ -53,7 +53,8 @@ class Weather(Resource):
             return {'message': 'Invalid Query'}
         URL = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid={API_KEY}&units=imperial'
         weather = requests.get(URL)
-        return {'name': weather.json()['name'], 'weather': weather.json()['weather'][0]['description'], 'temp': round(weather.json()['main']['temp']), 'min': round(weather.json()['main']['temp_min']), 'max': round(weather.json()['main']['temp_max'])}
+        weather = weather.json()
+        return {'name': weather['name'], 'weather': weather['weather'][0]['description'], 'temp': round(weather['main']['temp']), 'min': round(weather['main']['temp_min']), 'max': round(weather['main']['temp_max'])}
 
 api.add_resource(Color, '/color')
 api.add_resource(Weather, '/weather')
