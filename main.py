@@ -42,7 +42,7 @@ class Color(Resource):
             horoscope = getHoroscope(zodiac, "yesterday")
         dateElem = horoscope.find("span", class_="date-horscop").string[:-2]
         hexes = getHex(horoscope.find_all("p")[0].string[20:].split())
-        return {'date': today.strftime("%B %d, %Y"), 'colors': horoscope.find_all("p")[0].string[20:].split(), 'hex':hexes}, 200  # return data and 200 OK code
+        return {'zodiac':request.args.get('zodiac').capitalize(),'date': today.strftime("%B %d, %Y"), 'colors': horoscope.find_all("p")[0].string[20:].split(), 'hex':hexes}, 200  # return data and 200 OK code
 
 class Weather(Resource):
     def get(self):
