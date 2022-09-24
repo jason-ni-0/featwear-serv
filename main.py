@@ -41,7 +41,7 @@ class Color(Resource):
         if dateElem[:2] != str(today)[-2:]:
             horoscope = getHoroscope(zodiac, "yesterday")
         dateElem = horoscope.find("span", class_="date-horscop").string[:-2]
-        hexes = getHex(horoscope.find_all("p")[0].string[20:].split())
+        hexes = getHex(horoscope.find_all("p")[0].string[20:].replace('.',',').split(','))
         return {'zodiac':request.args.get('zodiac').capitalize(),'date': today.strftime("%B %d, %Y"), 'colors': horoscope.find_all("p")[0].string[20:].replace('.',',').split(','), 'hex':hexes}, 200  # return data and 200 OK code
 
 class Weather(Resource):
