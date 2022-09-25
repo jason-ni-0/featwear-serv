@@ -20,11 +20,14 @@ def getHoroscope(zodiac, day):
 def getHex(colors):
     hexes = []
     for color in colors:
-        color = color.replace(" ", "+")
-        URL = "https://alexbeals.com/projects/colorize/search.php?q=" + color
-        page = requests.get(URL)
-        soup = BeautifulSoup(page.content, "html.parser")
-        hexes.append(soup.find("span", class_="hex").string)
+        if color.lower() == "pink":
+            hexes.append("pink")
+        else:
+            color = color.replace(" ", "+")
+            URL = "https://alexbeals.com/projects/colorize/search.php?q=" + color
+            page = requests.get(URL)
+            soup = BeautifulSoup(page.content, "html.parser")
+            hexes.append(soup.find("span", class_="hex").string)
     return hexes
 
 
